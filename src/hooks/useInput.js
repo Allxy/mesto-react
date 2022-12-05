@@ -9,11 +9,11 @@ export const useInput = (initialValue) => {
     setError(e.target.validationMessage);
   };
 
-  const resetInput = useCallback(() => {
+  const resetInput =  useCallback(() => {
     setValue(initialValue);
     setError("");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [])
+  
 
   return [value, error, onChange, resetInput];
 };

@@ -2,20 +2,6 @@ class Api {
   constructor({ baseUrl, ...options }) {
     this._baseUrl = baseUrl;
     this._options = options;
-    if (options?.headers?.authorization) {
-      this.setToken(options?.headers?.authorization);
-    }
-  }
-
-  setToken(token) {
-    if (!this._options.headers) this._options.headers = {};
-    this._options.headers.authorization = token;
-  }
-
-  removeToken() {
-    if(this._options?.headers?.authorization) {
-      delete this._options?.headers?.authorization
-    }
   }
 
   async _fetch(path, method = "GET", body) {
@@ -30,18 +16,6 @@ class Api {
     if (response.ok) return json;
 
     throw new Error(json.message);
-  }
-}
-
-class DataApi extends Api {
-  constructor() {
-    super({
-      baseUrl: "https://mesto.nomoreparties.co/v1/cohort-52/",
-      headers: {
-        authorization: "47016496-8e67-44e3-804c-b828c4f61e69",
-        "Content-Type": "application/json",
-      },
-    });
   }
 
   getUser() {
@@ -74,28 +48,10 @@ class DataApi extends Api {
   }
 }
 
-class AuthApi extends Api {
-  constructor() {
-    super({
-      baseUrl: "https://auth.nomoreparties.co",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  }
-
-  check() {
-    return this._fetch("/users/me", "GET");
-  }
-
-  login(data) {
-    return this._fetch("/signin", "POST", data);
-  }
-
-  register(data) {
-    return this._fetch("/signup", "POST", data);
-  }
-}
-
-export const dataApi = new DataApi();
-export const authApi = new AuthApi();
+export default new Api({
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-52/",
+  headers: {
+    authorization: "47016496-8e67-44e3-804c-b828c4f61e69",
+    "Content-Type": "application/json",
+  },
+});

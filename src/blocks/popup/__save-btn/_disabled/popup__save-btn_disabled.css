@@ -1,4 +1,4 @@
-.button_disabled {
+.popup__save-btn_disabled {
   cursor: not-allowed;
   background-color: white;
   color: black;

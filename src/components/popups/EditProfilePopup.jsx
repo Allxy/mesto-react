@@ -1,7 +1,6 @@
 import { memo, useEffect } from "react";
 import { useUser } from "../../contexts/CurrentUserContext";
 import useForm from "../../hooks/useForm";
-import { inputClass, inputErrorClass } from "../../utils/classes";
 import PopupWithForm from "./PopupWithForm";
 
 function EditProfilePopup({ onClose, isOpen, onSubmit }) {
@@ -18,8 +17,11 @@ function EditProfilePopup({ onClose, isOpen, onSubmit }) {
   }, [isOpen, resetForm, currentUser]);
 
   function handleSubmit() {
-    return onSubmit(values);
+    return onSubmit(values)
   }
+
+  const inputErrorClass = (error) =>
+    "popup__input-error" + (error ? " popup__input-error_active" : "");
 
   return (
     <PopupWithForm
@@ -31,7 +33,7 @@ function EditProfilePopup({ onClose, isOpen, onSubmit }) {
       isValid={isValid}
     >
       <input
-        className={inputClass(errors.name, "popup__input")}
+        className="popup__input popup__input_type_name"
         placeholder="Имя"
         type="text"
         name="name"
@@ -47,7 +49,7 @@ function EditProfilePopup({ onClose, isOpen, onSubmit }) {
         {errors.name}
       </span>
       <input
-        className={inputClass(errors.about, "popup__input")}
+        className="popup__input popup__input_type_about"
         placeholder="О себе"
         type="text"
         name="about"

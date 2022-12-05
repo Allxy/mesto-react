@@ -1,6 +1,5 @@
 import { memo, useEffect } from "react";
 import { useInput } from "../../hooks/useInput";
-import { inputClass, inputErrorClass } from "../../utils/classes";
 import PopupWithForm from "./PopupWithForm";
 
 function EditAvatarPopup({ onClose, isOpen, onSubmit }) {
@@ -13,8 +12,12 @@ function EditAvatarPopup({ onClose, isOpen, onSubmit }) {
   }, [isOpen, resetUrl]);
 
   function handleSubmit() {
-    return onSubmit({ avatar: url });
+    return onSubmit({avatar : url})
   }
+
+  const inputErrorClass = (error) =>
+    "popup__input-error" + (error ? " popup__input-error_active" : "");
+
   return (
     <PopupWithForm
       onClose={onClose}
@@ -25,7 +28,7 @@ function EditAvatarPopup({ onClose, isOpen, onSubmit }) {
       isValid={!urlError && url}
     >
       <input
-        className={inputClass(urlError, "popup__input")}
+        className="popup__input popup__input_type_link"
         placeholder="Ссылка на аватар"
         type="url"
         name="link"

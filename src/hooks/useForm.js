@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 
-export default function useForm(initialValues) {
+export default function useForm(initialValues ) {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({});
   const [isValid, setValid] = useState(false);
@@ -14,10 +14,9 @@ export default function useForm(initialValues) {
   };
 
   const resetForm = useCallback((newValues) => {
-    setValues({ ...initialValues, ...newValues });
+    setValues({...initialValues, ...newValues});
     setErrors({});
     setValid(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return { values, errors, isValid, onChange, resetForm };
